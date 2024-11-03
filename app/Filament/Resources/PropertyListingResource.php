@@ -131,8 +131,7 @@ class PropertyListingResource extends Resource
                     FileUpload::make('video')
                         ->disk('public')
                         ->directory('Property/videos'),
-                    Toggle::make('published')
-                        ->minSize(100) ,
+                    Toggle::make('published') ,
                 ])->columnSpan(1),
 
 
