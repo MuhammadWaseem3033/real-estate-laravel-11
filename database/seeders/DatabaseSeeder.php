@@ -22,11 +22,11 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
         ]);
 
-        $this->call([
-            CategorySeeder::class,
-            PropertyFeatureSeeder::class,
-            PropertyTypeSeeder::class,
-            PropertyListingSeeder::class,
-        ]);
+        // $this->call([
+        //     CategorySeeder::class,
+        //     PropertyFeatureSeeder::class,
+        //     PropertyTypeSeeder::class,
+        //     PropertyListingSeeder::class,
+        // ]);
     }
 }
