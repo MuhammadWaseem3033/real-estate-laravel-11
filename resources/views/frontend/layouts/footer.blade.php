@@ -69,7 +69,7 @@
               <div class="row">
                   <div class="col-md-6 text-center text-md-start mb-3 mb-md-0 justify-content-center">
                       &copy; <a class="border-bottom" href="{{ route('frontend.index') }}">chohan associates</a>, All
-                      Right Reserved. Designed By <a class="border-bottom" href="#">Rana Waseem</a>
+                      Right Reserved. Designed By <a class="border-bottom" href="https://www.linkedin.com/in/muhammad-waseem-full-stack-laravel-developer/" target="_blank">Rana Waseem</a>
                   </div>
                   {{-- <div class="col-md-6 text-center text-md-end">
                     <div class="footer-menu">

@@ -3,18 +3,31 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\PropertyListing;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
     public function index()
     {
-        return view('frontend.index');
+        $PropretyListings = PropertyListing::with('Category', 'propertyType', 'Images')->get()->toArray();
+        // dd($PropretyListings);
+        return view('frontend.index', compact('PropretyListings'));
+    }
+
+    public function singleProperty(Request $Req)
+    {
+        // dd($Req->slug);
+        $Property = PropertyListing::where('slug', $Req->slug)->with('Category', 'propertyType', 'Images')->first();
+        // dd($Property);
+        return view('frontend.properties.single-property', compact('Property'));
     }
 
     public function properties()
     {
-        return view('frontend.properties.propertyList');
+        $PropretyListings = PropertyListing::with('Category', 'propertyType', 'Images')->get()->toArray();
+        return view('frontend.properties.propertyList', compact('PropretyListings'));
     }
 
     public function propertyType()

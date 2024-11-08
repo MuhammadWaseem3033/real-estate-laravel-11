@@ -3,10 +3,13 @@
 
 <head>
     <meta charset="utf-8">
-    <title>{{env('APP_NAME')}} -  </title>
+    <title>@yield('title') - {{env('APP_NAME')}}  </title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+    <meta name="meta-title" content="@yield('MetaTitle')" >
+    <meta name="keywords" content="@yield('keywords')" >
+    <meta name="description" content="@yield('description')" >
+
+    <link rel="canonical" href="{{url()->current()}}"/>  
 
     <!-- Favicon -->
     <link href="{{asset('frontend/img/favicon.ico')}}" rel="icon">

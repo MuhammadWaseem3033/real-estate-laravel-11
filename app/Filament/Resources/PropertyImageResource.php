@@ -40,12 +40,14 @@ class PropertyImageResource extends Resource
                     ->multiple()
                     ->panelLayout('grid')
                     // ->reorderable()
-                    ->minSize(50)
                     ->maxSize(1024)
                     ->minFiles(1)
                     ->maxFiles(6)
                     ->disk('public')
-                    ->directory('Property/images'),
+                    ->directory('Property/images')              
+                    ->imageEditor()
+                    ->imageResizeMode('cover')
+                    ->imageCropAspectRatio('16:9'),
             ]);
     }
 

@@ -7,6 +7,7 @@ Route::prefix('property')->group(function () {
     Route::get('/list', [FrontendController::class, 'properties'])->name('frontend.properties');
     Route::get('/type', [FrontendController::class, 'propertyType'])->name('frontend.properties-type');
     Route::get('/agent', [FrontendController::class, 'propertyAgent'])->name('frontend.properties-agent');
+    Route::get('/{slug}',[FrontendController::class ,'singleProperty'])->name('single.property');
 });
 Route::get('/blog', [FrontendController::class, 'blog'])->name('frontend.blog');
 Route::get('/about', [FrontendController::class, 'about'])->name('frontend.about');

@@ -34,12 +34,12 @@ return new class extends Migration
             $table->unsignedBigInteger('agent_id')->nullable();
             $table->string('status')->nullable();
             $table->unsignedBigInteger('property_type_id')->nullable();
-            $table->unsignedBigInteger('featured_id')->nullable();
+            $table->integer('featured_id')->default(false);
             $table->foreign('cat_id')->references('id')->on('categories');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('agent_id')->references('id')->on('agents');
             $table->foreign('property_type_id')->references('id')->on('property_types');
-            $table->foreign('featured_id')->references('id')->on('property_features');
+            // $table->foreign('featured_id')->references('id')->on('property_features');
             $table->softDeletes();
             $table->timestamps();
         });

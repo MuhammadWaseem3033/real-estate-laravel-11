@@ -10,6 +10,7 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -80,18 +81,15 @@ class PropertyListingResource extends Resource
                             ->relationship('propertyType', 'name')
                             ->required(),
 
-                        Select::make('featured_id')
-                            ->relationship('propertyFeature', 'name')
-                            ->required(),
-
-                        Select::make('status')
-                            ->required()
-                            ->options([
-                                'for_sale' => 'For Sale',
-                                'for_rent' => 'For Rent',
-                                'sold' => 'Sold',
-                                'rented' => 'Rented',
-                            ]),
+                        // Select::make('featured_id')
+                        //     // ->relationship('propertyFeature', 'name')
+                        //     ->options([
+                        //         'For Sale' => 'For Sale',
+                        //         'For Rent' => 'For Rent',
+                        //         'Sold' => 'Sold',
+                        //         'Rented' => 'Rented',
+                        //     ])
+                        //     ->required(),
 
                         TextInput::make('year_built')
                             ->required()
@@ -109,15 +107,15 @@ class PropertyListingResource extends Resource
 
                 Section::make('Description Section')
                     ->schema([
+                        RichEditor::make('meta_description')
+                            ->minLength(2)
+                            ->maxLength(200),
                         MarkdownEditor::make('description')
                             ->required()
                             ->minLength(2)
                             ->maxLength(1500),
-                        MarkdownEditor::make('meta_description')
-                            ->minLength(2)
-                            ->maxLength(200),
-                    ])->columnSpan(1),
 
+                    ])->columnSpan(1),
 
 
                 Section::make()->schema([
@@ -125,13 +123,25 @@ class PropertyListingResource extends Resource
                         ->disk('public')
                         ->directory('Property/images')
                         ->required()
-                        ->minSize(100)
-                        ->maxSize(1024),
+                        ->minSize(10)
+                        ->imageEditor()
+                        ->imageResizeMode('cover')
+                        ->imageCropAspectRatio('16:9')
+                    // ->imageResizeTargetWidth('1920')
+                    // ->imageResizeTargetHeight('1080')                       
+                    // ->panelLayout('grid')
+                    ,
 
                     FileUpload::make('video')
                         ->disk('public')
-                        ->directory('Property/videos'),
-                    Toggle::make('published') ,
+                        ->directory('Property/videos')
+                        ->panelLayout('grid'),
+
+                    // Toggle::make('published') ,                   
+
+                    Toggle::make('status')
+                        ->label('Status (prublished and unpublished *')
+                        ->required(),
                 ])->columnSpan(1),
 
 
@@ -155,7 +165,10 @@ class PropertyListingResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('image')->circular()
+                ImageColumn::make('image')
+                    // ->formatStateUsing(fn($state) => "<img src='" . env('APP_URL') . "/$state'/>")
+                    // ->html()
+                    // ->circuler()
                     ->toggleable()
                     ->sortable(),
                 ImageColumn::make('video')
@@ -171,21 +184,25 @@ class PropertyListingResource extends Resource
                 TextColumn::make('slug')
                     ->toggleable()
                     ->sortable(),
+                ToggleColumn::make('status')
+                    // ->color(fn(string $state): string => match ($state) {
+                    //     'for_sale' => 'gray',
+                    //     'for_rent' => 'warning',
+                    //     'sold' => 'success',
+                    //     'rented' => 'danger',
+                    // })
+                    ->toggleable()
+                    ->sortable(),
+                TextColumn::make('category.name')
+                    ->searchable()
+                    ->toggleable()
+                    ->sortable(),
                 TextColumn::make('price')
                     ->toggleable()
                     ->sortable(),
-                TextColumn::make('status')
-                    ->color(fn(string $state): string => match ($state) {
-                        'for_sale' => 'gray',
-                        'for_rent' => 'warning',
-                        'sold' => 'success',
-                        'rented' => 'danger',
-                    })
-                    ->toggleable()
-                    ->sortable(),
-                ToggleColumn::make('published')
-                    ->toggleable()
-                    ->sortable(),
+                // ToggleColumn::make('published')
+                //     ->toggleable()
+                //     ->sortable(),
                 TextColumn::make('bedrooms')
                     ->toggleable()
                     ->sortable(),
@@ -235,23 +252,22 @@ class PropertyListingResource extends Resource
                     ->dateTime(),
             ])
             ->filters([
-                Filter::make('published')
+                Filter::make('status')
                     ->toggle(),
                 SelectFilter::make('property_type_id')
                     ->options(fn(): array => PropertyType::query()->pluck('name', 'id')->all()),
 
-                SelectFilter::make('status')
-                    ->options([
-                        'for_sale' => 'For Sale',
-                        'for_rent' => 'For Rent',
-                        'sold' => 'Sold',
-                        'rented' => 'Rented',
-                    ])
+                // SelectFilter::make('status')
+                //     ->options([
+                //         'for_sale' => 'For Sale',
+                //         'for_rent' => 'For Rent',
+                //         'sold' => 'Sold',
+                //         'rented' => 'Rented',
+                //     ])
             ])
             ->filtersTriggerAction(
                 fn(Action $action) => $action
                     ->button()
-
                     ->label('Filter'),
             )
             ->actions([
