@@ -127,9 +127,7 @@ class PropertyListingResource extends Resource
                         ->imageEditor()
                         ->imageResizeMode('cover')
                         ->imageCropAspectRatio('16:9')
-                    // ->imageResizeTargetWidth('1920')
-                    // ->imageResizeTargetHeight('1080')                       
-                    // ->panelLayout('grid')
+                   
                     ,
 
                     FileUpload::make('video')

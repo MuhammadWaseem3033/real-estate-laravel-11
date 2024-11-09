@@ -9,4 +9,14 @@ class Agent extends Model
 {
     /** @use HasFactory<\Database\Factories\AgentFactory> */
     use HasFactory;
+
+    protected $fillable
+    = [
+        'name',
+        'designation',
+        'image',
+        'facebook',
+        'twitter',
+        'instagram',
+    ];
 }
