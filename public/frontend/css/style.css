@@ -1,9 +1,11 @@
 /********** Template CSS **********/
 :root {
-    --primary: #00B98E;
+    /* --primary: #00B98E; */
+    --primary: #0E2E50;
     --secondary: #FF6922;
     --light: #EFFDF5;
-    --dark: #0E2E50;
+    /* --dark: #0E2E50; */
+    --dark: #00B98E;
 }
 
 .back-to-top {
@@ -135,7 +137,7 @@
 }
 
 .navbar-light .navbar-nav .nav-link {
-    color: var(--dark);
+    color:var(--primary);
     font-weight: 500;
 }
 
@@ -262,7 +264,7 @@
 
 /*** Property List ***/
 .nav-pills .nav-item .btn {
-    color: var(--dark);
+    color:#FF6600;
 }
 
 .nav-pills .nav-item .btn:hover,
@@ -437,4 +439,8 @@
     margin-right: 0;
     padding-right: 0;
     border-right: none;
+}
+
+.span-color{
+ color: #ff6622;
 }
