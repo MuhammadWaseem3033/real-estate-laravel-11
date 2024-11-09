@@ -34,7 +34,7 @@
                                 <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Appartment</div>
                             </div>
                             <div class="p-4 pb-0">
-                                <h5 class="text-primary mb-3">{{ $Property['price'] }}</h5>
+                                <h5 class="text-primary mb-3">PKR: {{ $Property['price'] }}</h5>
                                 <a class="d-block h5 mb-2" href="{{ route('single.property',$Property['slug']) }}">{{ $Property['title'] }}</a>
                                 <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ $Property['location'] }}</p>
                             </div>
