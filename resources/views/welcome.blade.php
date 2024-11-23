@@ -947,6 +947,7 @@
                 </header>
                 <main>
                     <h1>Sorry Site Health No More</h1>
+                    <h1><a href="https://www.linkedin.com/in/muhammad-waseem-full-stack-laravel-developer/"> Contect With Developer </a></h1>
                 </main>
             </div>
         </div>
